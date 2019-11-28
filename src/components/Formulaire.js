@@ -14,6 +14,8 @@ export default class Formulaire extends Component {
     };
 
     addMessage(message);
+
+    this.setState({ message: "" });
   };
 
   handleSubmit = event => {
