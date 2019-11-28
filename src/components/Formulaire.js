@@ -4,14 +4,28 @@ export default class Formulaire extends Component {
   state = {
     message: ""
   };
+
+  createMessage = () => {
+    const { addMessage, pseudo } = this.props;
+
+    const message = {
+      pseudo: pseudo,
+      message: this.state.message
+    };
+
+    addMessage(message);
+  };
+
   handleSubmit = event => {
     event.preventDefault();
-    console.log("submit");
+    this.createMessage();
   };
+
   handleChange = event => {
     const message = event.target.value;
     this.setState({ message });
   };
+
   render() {
     return (
       <form className="form" onSubmit={this.handleSubmit}>
