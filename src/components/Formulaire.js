@@ -30,6 +30,12 @@ export default class Formulaire extends Component {
     this.setState({ message, length });
   };
 
+  handleKeyUp = event => {
+    if (event.key === "Enter") {
+      this.createMessage();
+    }
+  };
+
   render() {
     return (
       <form className="form" onSubmit={this.handleSubmit}>
@@ -38,6 +44,7 @@ export default class Formulaire extends Component {
           maxLength={this.props.length}
           value={this.state.message}
           onChange={this.handleChange}
+          onKeyUp={this.handleKeyUp}
         />
         <div className="info">{this.state.length}</div>
         <button type="submit">Envoyer</button>
