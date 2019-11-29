@@ -2,11 +2,12 @@ import React, { Component } from "react";
 
 export default class Formulaire extends Component {
   state = {
-    message: ""
+    message: "",
+    length: this.props.length
   };
 
   createMessage = () => {
-    const { addMessage, pseudo } = this.props;
+    const { addMessage, pseudo, length } = this.props;
 
     const message = {
       pseudo: pseudo,
@@ -15,7 +16,7 @@ export default class Formulaire extends Component {
 
     addMessage(message);
 
-    this.setState({ message: "" });
+    this.setState({ message: "", length: length });
   };
 
   handleSubmit = event => {
@@ -25,7 +26,8 @@ export default class Formulaire extends Component {
 
   handleChange = event => {
     const message = event.target.value;
-    this.setState({ message });
+    const length = this.props.length - message.length;
+    this.setState({ message, length });
   };
 
   render() {
@@ -33,11 +35,11 @@ export default class Formulaire extends Component {
       <form className="form" onSubmit={this.handleSubmit}>
         <textarea
           required
-          maxLength="140"
+          maxLength={this.props.length}
           value={this.state.message}
           onChange={this.handleChange}
         />
-        <div className="info">140</div>
+        <div className="info">{this.state.length}</div>
         <button type="submit">Envoyer</button>
       </form>
     );
